@@ -1,9 +1,9 @@
 version: "3.8"
 services:
-  biopatterngs-postgres:
+  biopatternsg-postgres:
     # Usamos la imagen oficial de pgvector basada en Postgres 17 (Stable)
     image: pgvector/pgvector:pg17
-    container_name: "biopatterngs-postgres"
+    container_name: "biopatternsg-postgres"
     restart: unless-stopped
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
@@ -12,7 +12,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./biopatterngs-postgres:/var/lib/postgresql/data/
+      - ./biopatternsg-postgres:/var/lib/postgresql/data/
     networks:
       - general-network
     # Healthcheck: Ayuda a Quarkus a saber si la DB ya está lista para aceptar conexiones
@@ -23,7 +23,7 @@ services:
       retries: 5
 
 volumes:
-  biopatterngs-postgres: {}
+  biopatternsg-postgres: {}
 
 networks:
   general-network:
