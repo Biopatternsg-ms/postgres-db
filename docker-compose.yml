@@ -12,7 +12,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./biopatternsg-postgres:/var/lib/postgresql/data/
+      - ./postgres-data:/var/lib/postgresql/data/
     networks:
       - general-network
     # Healthcheck: Ayuda a Quarkus a saber si la DB ya está lista para aceptar conexiones
@@ -23,7 +23,7 @@ services:
       retries: 5
 
 volumes:
-  biopatternsg-postgres:
+  postgres-data:
 
 networks:
   general-network:
