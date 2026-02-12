@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    environment {
+        NETWORK_NAME = 'general-network'
+        POSTGRES_DB = 'biopatterngs'
+    }
+
+    stages {
+        stage('Prepare Network') {
+            steps {
+                echo "Verifing network"
+                sh "docker network create ${NETWORK_NAME} || true"
+            }
+        }
+
+        stage('Run Postgres Service') {
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'postgres_credentials', 
+                        usernameVariable: 'POSTGRES_USER',
+                        passwordVariable: 'POSTGRES_PASSWORD'
+                    )
+                ]) {
+                    echo 'Starting the Postgres container and the internal network'
+                    sh 'REC=${REC} POSTGRES_USER=${POSTGRES_USER} POSTGRES_PASSWORD=${POSTGRES_PASSWORD} POSTGRES_DB=${POSTGRES_DB} docker compose up -d'
+                }
+            }
+        }
+    }
+    
+}
