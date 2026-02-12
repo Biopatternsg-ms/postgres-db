@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         NETWORK_NAME = 'general-network'
-        POSTGRES_DB = 'biopatterngs'
+        POSTGRES_DB = 'biopatternsg'
     }
 
     stages {
