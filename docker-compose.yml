@@ -12,9 +12,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data/
-      # ESTA ES LA SOLUCIÓN PARA EL ESQUEMA:
-      - ./init-db:/docker-entrypoint-initdb.d/
+      - postgres-data-bp:/var/lib/postgresql/data/
     networks:
       - general-network
     # Healthcheck: Ayuda a Quarkus a saber si la DB ya está lista para aceptar conexiones
@@ -26,7 +24,7 @@ services:
       retries: 5
 
 volumes:
-  postgres-data:
+  postgres-data-bp:
 
 networks:
   general-network:
